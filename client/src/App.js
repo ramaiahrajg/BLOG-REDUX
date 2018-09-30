@@ -31,7 +31,7 @@ class App extends Component {
       this.props.history.replace(routes.home);
       
     }
-    this.props.postActions.getPosts();
+    this.props.postActions.getAllPosts();
   }
   constructor() {
     super();
