@@ -10,28 +10,12 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
-            posts: [],
+            
             loading: false,
             hasError: false,
         }
     }
-    componentDidMount() {
-        this.setState({
-            loading : true,
-        });
-        apiCall('posts').then(posts =>{
-            this.setState({
-                posts,
-                loading : false,
-                hasError : false
-            });
-        })
-        .catch(err => {
-            this.setState({
-               hasError : true
-            });
-        });
-    }
+   
     render() {
         return(
             <div className={`posts-container container`}>
@@ -53,7 +37,7 @@ class Home extends Component {
                     null
             }
             {
-                this.state.posts.map(post => 
+                this.props.posts.map(post => 
                     <PostSummary 
                         key={post.id} 
                         post={post}/>
@@ -67,12 +51,7 @@ const mapStateToProps = (state) =>{
     return {
         posts : state.posts
     };
-}
+} 
 
-const mapDispatchToProps = () => {
-    return {
 
-    };
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Home);;
+export default connect(mapStateToProps)(Home);;

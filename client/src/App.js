@@ -13,7 +13,9 @@ import PropTypes from 'prop-types';
 import Post from './pages/Post/Post'
 import Author from './pages/Author/Author'
 import NewPost from './pages/NewPost/NewPost';
-
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as postActions from './redux/actions/postActions'
 
 
 class App extends Component {
@@ -29,6 +31,7 @@ class App extends Component {
       this.props.history.replace(routes.home);
       
     }
+    this.props.postActions.getPosts();
   }
   constructor() {
     super();
@@ -96,4 +99,17 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+const mapStateToProps = (state) =>{
+  return {
+      
+  };
+} 
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    postActions : bindActionCreators(postActions,dispatch),
+  };
+} 
+
+export default withRouter(
+  connect(mapStateToProps,mapDispatchToProps)(App)
+  );
